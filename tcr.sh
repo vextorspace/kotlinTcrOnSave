@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Running gradle tests..."
-./gradlew unitTest
+./gradlew clean unitTest
 
 # Store the test result
 TEST_RESULT=$?
