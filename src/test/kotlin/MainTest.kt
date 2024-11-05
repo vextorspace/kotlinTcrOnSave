@@ -13,7 +13,7 @@ class MainTest : ExpectSpec({
 
             System.setOut(printStream)
             main()
-            outputStream shouldBe "Hello World!"
+            outputStream.toString() shouldBe "Hello World!\n"
         }
     }
 })

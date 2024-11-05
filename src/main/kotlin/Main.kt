@@ -1,5 +1,5 @@
 package com.ronnev
 
 fun main() {
-    println("Hello World!")
+    println(Greeting().greet())
 }
