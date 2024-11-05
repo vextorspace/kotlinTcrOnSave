@@ -16,4 +16,15 @@ class MainTest : ExpectSpec({
             outputStream.toString() shouldBe "Hello World!\n"
         }
     }
+
+    context("Called with Bob as Argument") {
+        expect("should print Hello Bob!") {
+            val outputStream = ByteArrayOutputStream()
+            val printStream = PrintStream(outputStream)
+
+            System.setOut(printStream)
+            main(arrayOf("Bob"))
+            outputStream.toString() shouldBe "Hello Bob!\n"
+        }
+    }
 })
