@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm") version "2.0.20"
+    java
+    application
 }
 
 group = "com.ronnev"
@@ -53,25 +55,34 @@ tasks.register<Test>("unitTest") {
     }))
 }
 
-tasks.test {
-    useJUnitPlatform()
-
-    testLogging {
-        events("passed", "skipped", "failed")
-        showStandardStreams = true
-        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+tasks {
+    jar {
+        exclude("**/*Test.class")
     }
 
-    afterSuite(KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
-        if (desc.parent == null) { // will match the outermost suite
-            println("Summary Report: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)")
+    test {
+        useJUnitPlatform()
+
+        testLogging {
+            events("passed", "skipped", "failed")
+            showStandardStreams = true
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         }
-    }))
 
-    dependsOn("unitTest")
+        afterSuite(KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
+            if (desc.parent == null) { // will match the outermost suite
+                println("Summary Report: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)")
+            }
+        }))
+
+        dependsOn("unitTest")
+    }
 }
-
 
 kotlin {
     jvmToolchain(21)
+}
+
+application {
+   mainClass.set("com.ronnev.MainKt")
 }
