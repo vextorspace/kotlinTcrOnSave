@@ -9,15 +9,69 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    create("unitTestImplementation") {
+        extendsFrom(configurations.testImplementation.get())
+    }
+}
+
+val kotestVersion = "6.0.0.M1"
+
 dependencies {
-    testImplementation(kotlin("test"))
-    testImplementation("io.kotest:kotest-runner-junit5:4.6.0")
-    testImplementation("io.kotest:kotest-assertions-core:4.6.0")
+    implementation(kotlin("test"))
+    implementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    implementation("io.kotest:kotest-assertions-core:$kotestVersion")
+}
+
+sourceSets {
+    val main by getting {
+        java.srcDir("src/main/kotlin")
+        resources.srcDir("src/main/resources")
+    }
+
+    val unitTest by creating {
+        java.srcDir("src/main/kotlin")
+        resources.srcDir("src/test/resources")
+    }
+}
+
+tasks.register<Test>("unitTest") {
+    useJUnitPlatform()
+    testClassesDirs = sourceSets["unitTest"].output.classesDirs
+    classpath = sourceSets["unitTest"].runtimeClasspath
+
+    testLogging {
+        events("passed", "skipped", "failed")
+        showStandardStreams = true
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    }
+
+    afterSuite(KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
+        if (desc.parent == null) { // will match the outermost suite
+            println("Summary Report: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)")
+        }
+    }))
 }
 
 tasks.test {
     useJUnitPlatform()
+
+    testLogging {
+        events("passed", "skipped", "failed")
+        showStandardStreams = true
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    }
+
+    afterSuite(KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
+        if (desc.parent == null) { // will match the outermost suite
+            println("Summary Report: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)")
+        }
+    }))
+
+    dependsOn("unitTest")
 }
+
+
 kotlin {
     jvmToolchain(21)
 }
