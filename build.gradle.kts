@@ -44,20 +44,24 @@ tasks {
 
     val unitTest by creating(Test::class) {
         useJUnitPlatform()
-        testClassesDirs = sourceSets["unitTest"].output.classesDirs
+        testClassesDirs = sourceSets["unitTest"]
+            .output
+            .classesDirs
         classpath = sourceSets["unitTest"].runtimeClasspath
 
         testLogging {
             events("passed", "skipped", "failed")
             showStandardStreams = true
-            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+            exceptionFormat = org.gradle
+                .api
+                .tasks
+                .testing
+                .logging
+                .TestExceptionFormat
+                .FULL
         }
 
-        afterSuite(KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
-            if (desc.parent == null) { // will match the outermost suite
-                println("Summary Report: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)")
-            }
-        }))
+        displayResultsOfTests()
     }
 
     test {
@@ -69,11 +73,7 @@ tasks {
             exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         }
 
-        afterSuite(KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
-            if (desc.parent == null) { // will match the outermost suite
-                println("Summary Report: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)")
-            }
-        }))
+        displayResultsOfTests()
 
         dependsOn("unitTest")
     }
@@ -85,4 +85,19 @@ kotlin {
 
 application {
    mainClass.set("com.ronnev.MainKt")
+}
+
+fun Test.displayResultsOfTests() {
+    afterSuite(
+        KotlinClosure2<TestDescriptor, TestResult, Unit>(
+            { desc, result ->
+                if (desc.parent == null) {
+                    print("Summary Report: ")
+                    print("${result.resultType} (${result.testCount} tests,")
+                    print(" ${result.successfulTestCount} passed,")
+                    print(" ${result.failedTestCount} failed,")
+                    println(" ${result.skippedTestCount} skipped)")
+                }
+            })
+    )
 }
