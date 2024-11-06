@@ -37,30 +37,28 @@ sourceSets {
     }
 }
 
-tasks.register<Test>("unitTest") {
-    useJUnitPlatform()
-    testClassesDirs = sourceSets["unitTest"].output.classesDirs
-    classpath = sourceSets["unitTest"].runtimeClasspath
-
-    testLogging {
-        events("passed", "skipped", "failed")
-        showStandardStreams = true
-        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
-    }
-
-    afterSuite(KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
-        if (desc.parent == null) { // will match the outermost suite
-            println("Summary Report: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)")
-        }
-    }))
-}
-
 tasks {
     jar {
         exclude("**/*Test.class")
     }
 
-    
+    val unitTest by creating(Test::class) {
+        useJUnitPlatform()
+        testClassesDirs = sourceSets["unitTest"].output.classesDirs
+        classpath = sourceSets["unitTest"].runtimeClasspath
+
+        testLogging {
+            events("passed", "skipped", "failed")
+            showStandardStreams = true
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        }
+
+        afterSuite(KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
+            if (desc.parent == null) { // will match the outermost suite
+                println("Summary Report: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)")
+            }
+        }))
+    }
 
     test {
         useJUnitPlatform()
