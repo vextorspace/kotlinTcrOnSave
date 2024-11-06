@@ -41,7 +41,7 @@ sourceSets {
 
 tasks {
     jar {
-        exclude("**/*Test.class")
+        exclude("**/*Test.class", "**/*Test\$*.class")
     }
 
     val unitTest by creating(Test::class) {
