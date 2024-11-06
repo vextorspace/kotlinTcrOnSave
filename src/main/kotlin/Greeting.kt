@@ -15,4 +15,10 @@ class GreetingTest : ExpectSpec({
             Greeting().greet() shouldBe "Hello World!"
         }
     }
+
+    context("Greeting with Bob") {
+        expect("should return Hello Bob!") {
+            Greeting("Bob").greet() shouldBe "Hello Bob!"
+        }
+    }
 })
