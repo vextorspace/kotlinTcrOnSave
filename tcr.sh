@@ -10,10 +10,10 @@ TEST_RESULT=$?
 if [ $TEST_RESULT -ne 0 ]; then
     echo "Tests failed! Removing changes..."
     git reset --hard HEAD
-    exit 1
+else
+    echo "Tests passed! Committing..."
+    git add .
+    git commit -m "working"
 fi
 
-echo "Tests passed! Committing..."
-git add .
-git commit -m "working"
 exit 0
