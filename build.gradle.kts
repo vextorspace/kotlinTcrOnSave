@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+
 plugins {
     kotlin("jvm") version "2.0.20"
     java
@@ -49,17 +51,7 @@ tasks {
             .classesDirs
         classpath = sourceSets["unitTest"].runtimeClasspath
 
-        testLogging {
-            events("passed", "skipped", "failed")
-            showStandardStreams = true
-            exceptionFormat = org.gradle
-                .api
-                .tasks
-                .testing
-                .logging
-                .TestExceptionFormat
-                .FULL
-        }
+        setupTestLogging()
 
         displayResultsOfTests()
     }
@@ -67,11 +59,7 @@ tasks {
     test {
         useJUnitPlatform()
 
-        testLogging {
-            events("passed", "skipped", "failed")
-            showStandardStreams = true
-            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
-        }
+        setupTestLogging()
 
         displayResultsOfTests()
 
@@ -100,4 +88,12 @@ fun Test.displayResultsOfTests() {
                 }
             })
     )
+}
+
+fun Test.setupTestLogging() {
+    testLogging {
+        events("passed", "skipped", "failed")
+        showStandardStreams = true
+        exceptionFormat = TestExceptionFormat.FULL
+    }
 }
