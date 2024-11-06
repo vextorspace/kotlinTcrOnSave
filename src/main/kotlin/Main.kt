@@ -1,5 +1,6 @@
 package com.ronnev
 
 fun main(args: Array<String>? = null) {
-    println(Greeting().greet())
+    val toWhom = args?.get(0) ?: "World"
+    println(Greeting(toWhom).greet())
 }
