@@ -21,5 +21,4 @@ class GreetingTest : ExpectSpec({
             Greeting().greet("Bob") shouldBe "Hello Bob!"
         }
     }
-
 })
