@@ -47,3 +47,6 @@ bin/
 ### Emacs ###
 *~
 \#*\#
+
+### AI KEYS ###
+.env
