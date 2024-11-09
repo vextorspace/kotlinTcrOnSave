@@ -35,7 +35,7 @@ class GreetingTest :
 
             context("Greeting with Bob") {
                 expect("should return Hello Bob!") {
-                    Greeting().greetList(listOf("Bob")) shouldBe "Hello Bob!"
+                    Greeting().greet(listOf("Bob")) shouldBe "Hello Bob!"
                 }
             }
 
