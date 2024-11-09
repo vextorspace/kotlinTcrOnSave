@@ -4,10 +4,6 @@ import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.matchers.shouldBe
 
 class Greeting() {
-    fun greet(toWhom: String = "World"): String {
-        return "Hello $toWhom!"
-    }
-
     fun greetList(toWhom: List<String>): String {
         val greetees =
                 if (toWhom.isEmpty()) {
