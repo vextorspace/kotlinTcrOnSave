@@ -9,7 +9,13 @@ class Greeting() {
     }
 
     fun greetList(toWhom: List<String>): String {
-        return "Hello ${toWhom.joinToString(" and ") }!"
+        val greetees =
+                if (toWhom.isEmpty()) {
+                    "World"
+                } else {
+                    toWhom.joinToString(" and ")
+                }
+        return "Hello ${greetees}!"
     }
 }
 
