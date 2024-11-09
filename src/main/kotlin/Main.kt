@@ -1,6 +1,8 @@
 package com.ronnev
 
+import kotlin.collections.toList
+
 fun main(args: Array<String>? = null) {
-    val toWhom = args?.getOrNull(0) ?: "World"
-    println(Greeting().greet(toWhom))
+    val toWhom = args?.toList() ?: emptyList()
+    println(Greeting().greetList(toWhom))
 }
