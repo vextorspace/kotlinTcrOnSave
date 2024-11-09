@@ -29,7 +29,7 @@ class GreetingTest :
         ExpectSpec({
             context("Greeting") {
                 expect("should return Hello World!") {
-                    Greeting().greetList(emptyList()) shouldBe "Hello World!"
+                    Greeting().greet(emptyList()) shouldBe "Hello World!"
                 }
             }
 
