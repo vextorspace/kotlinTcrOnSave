@@ -13,16 +13,6 @@ class Greeting() {
                 }
         return "Hello ${greetees}!"
     }
-
-    fun greetList(toWhom: List<String>): String {
-        val greetees =
-                if (toWhom.isEmpty()) {
-                    "World"
-                } else {
-                    toWhom.joinToString(" and ")
-                }
-        return "Hello ${greetees}!"
-    }
 }
 
 class GreetingTest :
@@ -41,7 +31,7 @@ class GreetingTest :
 
             context("Greeting with Bob and Jen") {
                 expect("should return Hello Bob and Jen!") {
-                    Greeting().greetList(listOf("Bob", "Jen")) shouldBe "Hello Bob and Jen!"
+                    Greeting().greet(listOf("Bob", "Jen")) shouldBe "Hello Bob and Jen!"
                 }
             }
         })
