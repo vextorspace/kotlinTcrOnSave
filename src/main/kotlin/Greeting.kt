@@ -4,6 +4,16 @@ import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.matchers.shouldBe
 
 class Greeting() {
+    fun greet(toWhom: List<String>): String {
+        val greetees =
+                if (toWhom.isEmpty()) {
+                    "World"
+                } else {
+                    toWhom.joinToString(" and ")
+                }
+        return "Hello ${greetees}!"
+    }
+
     fun greetList(toWhom: List<String>): String {
         val greetees =
                 if (toWhom.isEmpty()) {
