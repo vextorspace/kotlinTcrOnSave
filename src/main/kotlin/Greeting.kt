@@ -20,7 +20,9 @@ class GreetingTest :
             }
 
             context("Greeting with Bob") {
-                expect("should return Hello Bob!") { Greeting().greet("Bob") shouldBe "Hello Bob!" }
+                expect("should return Hello Bob!") {
+                    Greeting().greetList(listOf("Bob")) shouldBe "Hello Bob!"
+                }
             }
 
             context("Greeting with Bob and Jen") {
