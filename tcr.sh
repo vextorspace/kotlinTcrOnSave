@@ -13,7 +13,7 @@ if [ $TEST_RESULT -ne 0 ]; then
 else
     echo "Tests passed! Committing..."
     git add .
-    COMMIT_MESSAGE=`./commit_message`
+    COMMIT_MESSAGE=`commit_message`
     git commit -m "$COMMIT_MESSAGE"
 fi
 
