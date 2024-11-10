@@ -39,7 +39,7 @@ class MainTest :
                 }
             }
 
-            context("Called with Joel, Jerome, and Joel") {
+            context("Called with Joel, Jerome, and Mathew") {
                 expect("should print Hello my Brothers!") {
                     val outputStream = ByteArrayOutputStream()
                     val printStream = PrintStream(outputStream)
