@@ -5,6 +5,10 @@ import io.kotest.matchers.shouldBe
 
 class Greeting() {
     fun greet(toWhom: List<String>): String {
+        if (toWhom.isEmpty()) {
+            return "Hello World!"
+        }
+
         val greetees =
                 if (toWhom.isEmpty()) {
                     "World"
