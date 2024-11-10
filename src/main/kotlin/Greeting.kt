@@ -9,7 +9,11 @@ class Greeting() {
                 if (toWhom.isEmpty()) {
                     "World"
                 } else {
-                    toWhom.joinToString(" and ")
+                    if (toWhom.containsAll(listOf("Joel", "Jerome", "Mathew"))) {
+                        "my Brothers"
+                    } else {
+                        toWhom.joinToString(" and ")
+                    }
                 }
         return "Hello ${greetees}!"
     }
@@ -38,6 +42,13 @@ class GreetingTest :
             context("Greeting with Joel and Jerome") {
                 expect("should return Hello Joel and Jerome!") {
                     Greeting().greet(listOf("Joel", "Jerome")) shouldBe "Hello Joel and Jerome!"
+                }
+            }
+
+            context("Greeting with Joel, Jerome, and Mathew") {
+                expect("should return Hello my Brothers!") {
+                    Greeting().greet(listOf("Joel", "Jerome", "Mathew")) shouldBe
+                            "Hello my Brothers!"
                 }
             }
         })
