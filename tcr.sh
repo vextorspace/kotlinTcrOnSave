@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo "Running gradle tests..."
+./gradlew test
 ./gradlew clean unitTest
 
 # Store the test result

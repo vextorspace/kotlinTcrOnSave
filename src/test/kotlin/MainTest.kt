@@ -38,4 +38,15 @@ class MainTest :
                     outputStream.toString() shouldBe "Hello Bob and Jen!\n"
                 }
             }
+
+            context("Called with Joel, Jerome, and Joel") {
+                expect("should print Hello my Brothers!") {
+                    val outputStream = ByteArrayOutputStream()
+                    val printStream = PrintStream(outputStream)
+
+                    System.setOut(printStream)
+                    main(arrayOf("Joel", "Jerome", "Joel"))
+                    outputStream.toString() shouldBe "Hello my Brothers!\n"
+                }
+            }
         })
