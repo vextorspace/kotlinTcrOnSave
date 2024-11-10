@@ -34,4 +34,10 @@ class GreetingTest :
                     Greeting().greet(listOf("Bob", "Jen")) shouldBe "Hello Bob and Jen!"
                 }
             }
+
+            context("Greeting with Joel and Jerome") {
+                expect("should return Hello Joel and Jerome!") {
+                    Greeting().greet(listOf("Joel", "Jerome")) shouldBe "Hello Joel and Jerome!"
+                }
+            }
         })
