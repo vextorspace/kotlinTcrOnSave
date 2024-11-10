@@ -45,7 +45,7 @@ class MainTest :
                     val printStream = PrintStream(outputStream)
 
                     System.setOut(printStream)
-                    main(arrayOf("Joel", "Jerome", "Joel"))
+                    main(arrayOf("Joel", "Jerome", "Mathew"))
                     outputStream.toString() shouldBe "Hello my Brothers!\n"
                 }
             }
