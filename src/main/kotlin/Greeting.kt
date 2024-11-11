@@ -9,7 +9,7 @@ class Greeting() {
             return "Hello World!"
         }
 
-        if (areMyBrothers(toWhom)) {
+        if (toWhom.areMyBrothers()) {
             return "Hello my Brothers!"
         }
 
@@ -17,8 +17,8 @@ class Greeting() {
         return "Hello ${greetees}!"
     }
 
-    fun areMyBrothers(toWhom: List<String>): Boolean {
-        return toWhom.containsAll(listOf("Joel", "Jerome", "Mathew"))
+    fun List<String>.areMyBrothers(): Boolean {
+        return this.containsAll(listOf("Joel", "Jerome", "Mathew"))
     }
 }
 
