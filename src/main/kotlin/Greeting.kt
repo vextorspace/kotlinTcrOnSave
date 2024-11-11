@@ -5,15 +5,11 @@ import io.kotest.matchers.shouldBe
 
 class Greeting() {
     fun greet(toWhom: List<String>): String {
-        if (toWhom.isEmpty()) {
-            return "Hello World!"
+        return when {
+            toWhom.isEmpty() -> "Hello World!"
+            toWhom.areMyBrothers() -> "Hello my Brothers!"
+            else -> "Hello ${toWhom.joinWithAnd()}!"
         }
-
-        if (toWhom.areMyBrothers()) {
-            return "Hello my Brothers!"
-        }
-
-        return "Hello ${toWhom.joinWithAnd()}!"
     }
 
     fun List<String>.areMyBrothers(): Boolean {
