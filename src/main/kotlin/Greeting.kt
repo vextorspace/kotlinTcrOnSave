@@ -13,8 +13,7 @@ class Greeting() {
             return "Hello my Brothers!"
         }
 
-        val greetees = toWhom.joinWithAnd()
-        return "Hello ${greetees}!"
+        return "Hello ${toWhom.joinWithAnd()}!"
     }
 
     fun List<String>.areMyBrothers(): Boolean {
