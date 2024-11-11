@@ -10,14 +10,10 @@ class Greeting() {
         }
 
         val greetees =
-                if (toWhom.isEmpty()) {
-                    "World"
+                if (toWhom.containsAll(listOf("Joel", "Jerome", "Mathew"))) {
+                    "my Brothers"
                 } else {
-                    if (toWhom.containsAll(listOf("Joel", "Jerome", "Mathew"))) {
-                        "my Brothers"
-                    } else {
-                        toWhom.joinToString(" and ")
-                    }
+                    toWhom.joinToString(" and ")
                 }
         return "Hello ${greetees}!"
     }
