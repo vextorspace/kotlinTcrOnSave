@@ -13,12 +13,16 @@ class Greeting() {
             return "Hello my Brothers!"
         }
 
-        val greetees = toWhom.joinToString(" and ")
+        val greetees = toWhom.joinWithAnd()
         return "Hello ${greetees}!"
     }
 
     fun List<String>.areMyBrothers(): Boolean {
         return this.containsAll(listOf("Joel", "Jerome", "Mathew"))
+    }
+
+    fun List<String>.joinWithAnd(): String {
+        return this.joinToString(separator = " and ")
     }
 }
 
