@@ -9,12 +9,16 @@ class Greeting() {
             return "Hello World!"
         }
 
-        if (toWhom.containsAll(listOf("Joel", "Jerome", "Mathew"))) {
+        if (areMyBrothers(toWhom)) {
             return "Hello my Brothers!"
         }
 
         val greetees = toWhom.joinToString(" and ")
         return "Hello ${greetees}!"
+    }
+
+    fun areMyBrothers(toWhom: List<String>): Boolean {
+        return toWhom.containsAll(listOf("Joel", "Jerome", "Mathew"))
     }
 }
 
