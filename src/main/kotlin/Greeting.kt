@@ -9,6 +9,10 @@ class Greeting() {
             return "Hello World!"
         }
 
+        if (toWhom.containsAll(listOf("Joel", "Jerome", "Mathew"))) {
+            return "Hello my Brothers!"
+        }
+
         val greetees =
                 if (toWhom.containsAll(listOf("Joel", "Jerome", "Mathew"))) {
                     "my Brothers"
