@@ -13,12 +13,7 @@ class Greeting() {
             return "Hello my Brothers!"
         }
 
-        val greetees =
-                if (toWhom.containsAll(listOf("Joel", "Jerome", "Mathew"))) {
-                    "my Brothers"
-                } else {
-                    toWhom.joinToString(" and ")
-                }
+        val greetees = toWhom.joinToString(" and ")
         return "Hello ${greetees}!"
     }
 }
